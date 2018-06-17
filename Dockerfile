@@ -1,5 +1,7 @@
-FROM buildpack-deps:bionic
+FROM alpine:latest
 LABEL maintainer="skinlayers@gmail.com"
+
+RUN apk add --update curl
 
 ARG SPROUT_PKEY_NAME=sprout-proving.key
 ARG SPROUT_PKEY_URL=https://z.cash/downloads/$SPROUT_PKEY_NAME
