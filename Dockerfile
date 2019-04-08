@@ -4,7 +4,7 @@ LABEL maintainer="skinlayers@gmail.com"
 RUN apk add --update curl
 
 ARG SPROUT_PKEY_NAME=sprout-proving.key
-ARG SPROUT_PKEY_URL=https://z.cash/downloads/$SPROUT_PKEY_NAME
+ARG SPROUT_PKEY_URL=https://downloads.horizen.global/file/TrustedSetup/$SPROUT_PKEY_NAME
 ARG SPROUT_PKEY_SHA256=8bc20a7f013b2b58970cddd2e7ea028975c88ae7ceb9259a5344a16bc2c0eef7
 ARG SPROUT_PKEY_SHA256_FILE=sprout-proving-sha256.txt
 
@@ -16,7 +16,7 @@ RUN set -eu && \
 
 
 ARG SPROUT_VKEY_NAME=sprout-verifying.key
-ARG SPROUT_VKEY_URL=https://z.cash/downloads/$SPROUT_VKEY_NAME
+ARG SPROUT_VKEY_URL=https://downloads.horizen.global/file/TrustedSetup/$SPROUT_VKEY_NAME
 ARG SPROUT_VKEY_SHA256=4bd498dae0aacfd8e98dc306338d017d9c08dd0918ead18172bd0aec2fc5df82
 ARG SPROUT_VKEY_SHA256_FILE=sprout-verifying-sha256.txt
 
@@ -25,3 +25,35 @@ RUN curl -L "$SPROUT_VKEY_URL" -o "$SPROUT_VKEY_NAME" && \
         > "$SPROUT_VKEY_SHA256_FILE" && \
     sha256sum -c "$SPROUT_VKEY_SHA256_FILE"
 
+
+ARG SAPLING_SPEND_NAME=sapling-spend.params
+ARG SAPLING_SPEND_URL=https://downloads.horizen.global/file/TrustedSetup/$SAPLING_SPEND_NAME
+ARG SAPLING_SPEND_SHA256=8e48ffd23abb3a5fd9c5589204f32d9c31285a04b78096ba40a79b75677efc13
+ARG SAPLING_SPEND_SHA256_FILE=sapling-spend-sha256.txt
+
+RUN curl -L "$SAPLING_SPEND_URL" -o "$SAPLING_SPEND_NAME" && \
+    echo "$SAPLING_SPEND_SHA256  $SAPLING_SPEND_NAME" \
+        > "$SAPLING_SPEND_SHA256_FILE" && \
+    sha256sum -c "$SAPLING_SPEND_SHA256_FILE"
+
+
+ARG SAPLING_OUTPUT_NAME=sapling-output.params
+ARG SAPLING_OUTPUT_URL=https://downloads.horizen.global/file/TrustedSetup/$SAPLING_OUTPUT_NAME
+ARG SAPLING_OUTPUT_SHA256=2f0ebbcbb9bb0bcffe95a397e7eba89c29eb4dde6191c339db88570e3f3fb0e4
+ARG SAPLING_OUTPUT_SHA256_FILE=sapling-output-sha256.txt
+
+RUN curl -L "$SAPLING_OUTPUT_URL" -o "$SAPLING_OUTPUT_NAME" && \
+    echo "$SAPLING_OUTPUT_SHA256  $SAPLING_OUTPUT_NAME" \
+        > "$SAPLING_OUTPUT_SHA256_FILE" && \
+    sha256sum -c "$SAPLING_OUTPUT_SHA256_FILE"
+
+
+ARG SAPLING_SPROUT_GROTH16_NAME=sprout-groth16.params
+ARG SAPLING_SPROUT_GROTH16_URL=https://downloads.horizen.global/file/TrustedSetup/$SAPLING_SPROUT_GROTH16_NAME
+ARG SAPLING_SPROUT_GROTH16_SHA256=b685d700c60328498fbde589c8c7c484c722b788b265b72af448a5bf0ee55b50
+ARG SAPLING_SPROUT_GROTH16_SHA256_FILE=sprout-groth16-sha256.txt
+
+RUN curl -L "$SAPLING_SPROUT_GROTH16_URL" -o "$SAPLING_SPROUT_GROTH16_NAME" && \
+    echo "$SAPLING_SPROUT_GROTH16_SHA256  $SAPLING_SPROUT_GROTH16_NAME" \
+        > "$SAPLING_SPROUT_GROTH16_SHA256_FILE" && \
+    sha256sum -c "$SAPLING_SPROUT_GROTH16_SHA256_FILE"
